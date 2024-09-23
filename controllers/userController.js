@@ -25,16 +25,16 @@ exports.getUser = catchAsync(async (req, res) => {
   });
 });
 
-exports.createUser = catchAsync(async (req, res) => {
-  const newUser = await User.create(req.body);
+// exports.createUser = catchAsync(async (req, res) => {
+//   const newUser = await User.create(req.body);
 
-  res.status(201).json({
-    status: "success",
-    data: {
-      newUser,
-    },
-  });
-});
+//   res.status(201).json({
+//     status: "success",
+//     data: {
+//       newUser,
+//     },
+//   });
+// });
 
 exports.updateUser = catchAsync(async (req, res) => {
   const { id } = req.params;
