@@ -9,7 +9,7 @@ router
 
 router
   .route("/:id")
-  .get(userController.getAllUser)
+  .get(userController.getUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 

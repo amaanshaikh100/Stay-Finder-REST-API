@@ -1,93 +1,60 @@
 const User = require("./../models/userSchema");
+const catchAsync = require("./../utils/catchAsync");
 
-exports.getAllUser = async (req, res) => {
-  try {
-    const user = await User.find();
+exports.getAllUser = catchAsync(async (req, res) => {
+  const user = await User.find();
 
-    res.status(200).json({
-      status: "success",
-      results: user.length,
-      data: {
-        user,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "error",
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: "success",
+    results: user.length,
+    data: {
+      user,
+    },
+  });
+});
 
-exports.getUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await User.findById(id);
+exports.getUser = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
 
-    res.status(200).json({
-      status: "success",
-      data: {
-        user,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "error",
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: "success",
+    data: {
+      user,
+    },
+  });
+});
 
-exports.createUser = async (req, res) => {
-  try {
-    const newUser = await User.create(req.body);
+exports.createUser = catchAsync(async (req, res) => {
+  const newUser = await User.create(req.body);
 
-    res.status(201).json({
-      status: "success",
-      data: {
-        newUser,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "error",
-      message: err.message,
-    });
-  }
-};
-exports.updateUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await User.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
+  res.status(201).json({
+    status: "success",
+    data: {
+      newUser,
+    },
+  });
+});
 
-    res.status(200).json({
-      status: "success",
-      data: {
-        user,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "error",
-      message: err.message,
-    });
-  }
-};
+exports.updateUser = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
 
-exports.deleteUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const newUser = await User.findByIdAndDelete(id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      user,
+    },
+  });
+});
 
-    res.status(204).json({
-      status: "success",
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "error",
-      message: err.message,
-    });
-  }
-};
+exports.deleteUser = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const newUser = await User.findByIdAndDelete(id);
+
+  res.status(204).json({
+    status: "success",
+  });
+});
