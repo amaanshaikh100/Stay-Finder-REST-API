@@ -6,8 +6,13 @@ const authController = require("./../controllers/authController");
 router.route("/signup").post(authController.signUp);
 router.route("/login").post(authController.logIn);
 
-router.route("/").get(userController.getAllUser);
-// .post(userController.createUser)
+router
+  .route("/")
+  .get(
+    authController.protect,
+    authController.restrictTo("admin"),
+    userController.getAllUser
+  );
 
 router
   .route("/:id")
